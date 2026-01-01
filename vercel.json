@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://thetimenews.site/:path*",
+      "permanent": false
+    }
+  ]
+}
