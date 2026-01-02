@@ -2,6 +2,18 @@
   "redirects": [
     {
       "source": "/:path*",
+      "has": [{ "type": "host", "value": "sport.hotzxgirl.online"}],
+      "destination": "https://thetimenews.site/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "go.hotzxgirl.online"}],
+      "destination": "https://thetimenews.us/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/:path*",
       "destination": "https://thetimenews.site/:path*",
       "permanent": false
     }
