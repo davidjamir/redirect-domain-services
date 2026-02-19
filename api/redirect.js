@@ -8,8 +8,6 @@ export default async function handler(req, res) {
   const prefix = parts[0];
   const remainingPath = parts.slice(1).join("/");
 
-  console.log({ wrap_host, prefix });
-
   // lookup DB theo site + code
   const record = await getOneWrapDomain({
     wrap_host,
@@ -20,8 +18,7 @@ export default async function handler(req, res) {
     return res.status(404).end();
   }
 
-  console.log(record);
-  let targetHost = record.target_url;
+  let targetHost = record.target_host;
   if (!targetHost.startsWith("http")) {
     targetHost = `https://${targetHost}`;
   }
