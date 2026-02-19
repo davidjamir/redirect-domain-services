@@ -11,11 +11,7 @@ export default async function handler(req, res) {
   }
 
   const prefix = segments[0];
-
-  const slug = req.query.slug || "";
-  const parts = slug.split("/").filter(Boolean);
-
-  const remainingPath = parts.slice(1).join("/");
+  const remainingPath = segments.slice(1).join("/");
 
   // lookup DB theo site + code
   const record = await getOneWrapDomain({
