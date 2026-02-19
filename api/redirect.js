@@ -18,23 +18,8 @@ export default async function handler(req, res) {
     return res.status(404).end();
   }
 
-  let targetHost = record.target_host;
-  if (!targetHost.startsWith("http")) {
-    targetHost = `https://${targetHost}`;
-  }
+  const targetHost = record.target_host;
+  const targetUrl = `https://${targetHost}/${slug}`;
 
-  const url = new URL(targetHost);
-
-  if (remainingPath) {
-    url.pathname = `/${remainingPath}`;
-  }
-
-  // copy toàn bộ query trừ slug
-  Object.keys(req.query).forEach((key) => {
-    if (key !== "slug") {
-      url.searchParams.set(key, req.query[key]);
-    }
-  });
-
-  return res.redirect(302, url.toString());
+  return res.redirect(302, targetUrl);
 }
