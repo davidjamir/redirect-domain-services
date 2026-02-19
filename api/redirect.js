@@ -20,6 +20,7 @@ export default async function handler(req, res) {
     return res.status(404).end();
   }
 
+  console.log(record);
   let targetHost = record.target_url;
   if (!targetHost.startsWith("http")) {
     targetHost = `https://${targetHost}`;
