@@ -1,13 +1,19 @@
 const { getOneWrapDomain } = require("../database/wraps");
 
 export default async function handler(req, res) {
+  const host = req.headers["x-forwarded-host"] || req.headers.host;
   const proto = req.headers["x-forwarded-proto"] || "https";
-  const host =
-    req.headers["x-forwarded-host"] || req.headers.host || "localhost";
   const currentUrl = new URL(req.url, `${proto}://${host}`);
 
-  const parts = currentUrl.pathname.split("/").filter(Boolean);
-  const prefix = parts[0];
+  const segments = currentUrl.pathname.split("/").filter(Boolean);
+  if (!segments.length) {
+    return res.status(404).end();
+  }
+
+  const prefix = segments[0];
+
+  const slug = req.query.slug || "";
+  const parts = slug.split("/").filter(Boolean);
 
   const remainingPath = parts.slice(1).join("/");
 
@@ -26,11 +32,7 @@ export default async function handler(req, res) {
     ? record.target_host
     : `https://${record.target_host}`;
 
-  const targetUrl = new URL(targetBase);
-  targetUrl.pathname = remainingPath ? `/${remainingPath}` : "/";
-  targetUrl.search = currentUrl.search;
+  const targetUrl = `${targetBase}/${remainingPath}`;
 
-  console.log(targetUrl.search)
-
-  return res.redirect(302, targetUrl.toString());
+  return res.redirect(302, targetUrl);
 }
