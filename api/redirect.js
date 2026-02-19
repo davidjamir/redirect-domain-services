@@ -3,6 +3,7 @@ const { getOneWrapDomain } = require("../database/wraps");
 export default async function handler(req, res) {
   const wrap_host = req.headers.host;
   const slug = req.query.slug || "";
+  console.log("Slug: ", slug)
 
   const parts = slug.split("/").filter(Boolean);
   const prefix = parts[0];
