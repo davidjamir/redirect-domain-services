@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   }
 
   const targetHost = record.target_host;
-  const targetUrl = `https://${targetHost}/${slug}`;
+  const targetUrl = `https://${targetHost}/${remainingPath}`;
 
   return res.redirect(302, targetUrl);
 }
