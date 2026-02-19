@@ -30,5 +30,6 @@ export default async function handler(req, res) {
 
   const targetUrl = `${targetBase}/${remainingPath}`;
 
+  console.log(req.url);
   return res.redirect(302, targetUrl);
 }
