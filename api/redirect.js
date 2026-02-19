@@ -30,5 +30,7 @@ export default async function handler(req, res) {
   targetUrl.pathname = remainingPath ? `/${remainingPath}` : "/";
   targetUrl.search = currentUrl.search;
 
+  console.log(targetUrl.search)
+
   return res.redirect(302, targetUrl.toString());
 }
